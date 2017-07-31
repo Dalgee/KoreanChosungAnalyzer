@@ -5,9 +5,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
 
@@ -17,20 +19,42 @@ public class KoreanChosungTokenizerTest {
 
 
     static {
-        R = new StringReader("hahahah merong");
+        Reader r;
+
+        try {
+            r = new FileReader("src/test/resources/input1.txt");
+        } catch (Exception e) {
+            r = null;
+        }
+
+        R = r;
     }
+
 
     @Before
     public void setup() throws IOException {
-        TOKENIZER.reset();
         TOKENIZER.setReader(R);
+        TOKENIZER.reset();
     }
+
 
     @Test
     public void test1() throws IOException {
+        DirectoryStream<Path> paths = Files.newDirectoryStream(Paths.get("src/test/resources"));
+
+        paths.forEach(p -> {
+            try {
+                Files.lines(p).forEach(System.out::println);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+
+
 
         while(TOKENIZER.incrementToken()) {
-
+            System.out.println("merong");
         }
 
     }
