@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  *
  */
-public class KoreanChosungTokenFilter extends TokenFilter {
+public final class KoreanChosungTokenFilter extends TokenFilter {
     /**
      * Construct a token stream filtering the given input.
      *
@@ -17,6 +17,7 @@ public class KoreanChosungTokenFilter extends TokenFilter {
     public KoreanChosungTokenFilter(TokenStream input) {
         super(input);
     }
+
 
     @Override
     public boolean incrementToken() throws IOException {
