@@ -4,6 +4,7 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.index.analysis.AbstractIndexAnalyzerProvider;
+import org.elasticsearch.index.analysis.TokenizerFactory;
 
 public class KoreanChosungAnalyzerProvider extends AbstractIndexAnalyzerProvider<KoreanChosungAnalyzer> {
     /**
@@ -19,6 +20,6 @@ public class KoreanChosungAnalyzerProvider extends AbstractIndexAnalyzerProvider
 
     @Override
     public KoreanChosungAnalyzer get() {
-        return null;
+        return new KoreanChosungAnalyzer();
     }
 }

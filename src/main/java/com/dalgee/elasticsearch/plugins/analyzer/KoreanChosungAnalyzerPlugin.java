@@ -13,6 +13,6 @@ public class KoreanChosungAnalyzerPlugin extends Plugin implements AnalysisPlugi
 
     @Override
     public Map<String, AnalysisModule.AnalysisProvider<AnalyzerProvider<? extends Analyzer>>> getAnalyzers() {
-        return Collections.singletonMap("chosung-analyzer", KoreanChosungAnalyzerProvider::new);
+        return Collections.singletonMap("korean-chosung-analyzer", KoreanChosungAnalyzerProvider::new);
     }
 }

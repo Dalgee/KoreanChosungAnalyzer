@@ -17,24 +17,17 @@ dependencies {
 }
 
 
-task buildPlugin {
-
-}
-
-
 task copying(dependsOn:build, type: Copy) {
-    String path = "${project.buildDir}/elasticsearch"
+    String workDir = "${project.buildDir}/elasticsearch"
 
-    mkdir(path)
+    mkdir(workDir)
 
     from "${project.buildDir}/libs/", "${projectDir}/src/main/resources/plugin-descriptor.properties"
-    into path
+    into workDir
 }
 
 
 task zipping(dependsOn:copying, type: Zip) {
-    String path = "${project.buildDir}/elasticsearch"
-
-    from path
-    include "*"
+    from "${project.buildDir}"
+    include "elasticsearch/*"
 }
