@@ -1,20 +1,24 @@
 package com.dalgee.elasticsearch.plugins.tokenizer;
 
+import com.dalgee.elasticsearch.plugins.analyzer.KoreanChosungAnalyzer;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.core.WhitespaceTokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 
-import static org.junit.Assert.*;
 
 public class KoreanChosungTokenizerTest {
-    private static final Tokenizer TOKENIZER = new KoreanChosungTokenizer();
+    private static final Tokenizer tokenizer = new KoreanChosungTokenizer();
     private static final Reader R;
 
 
@@ -23,7 +27,8 @@ public class KoreanChosungTokenizerTest {
 
         try {
             r = new FileReader("src/test/resources/input1.txt");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             r = null;
         }
 
@@ -31,38 +36,30 @@ public class KoreanChosungTokenizerTest {
     }
 
 
-    @Before
+    @Test
     public void setup() throws IOException {
-        TOKENIZER.setReader(R);
-        TOKENIZER.reset();
+        tokenizer.setReader(new StringReader("abcd efgh ijkl"));
+        tokenizer.reset();
+
+        CharTermAttribute term = tokenizer.addAttribute(CharTermAttribute.class);
+
+        while(tokenizer.incrementToken()) {
+            System.out.println(term.toString());
+        }
+
     }
 
 
     @Test
     public void test1() throws IOException {
-        DirectoryStream<Path> paths = Files.newDirectoryStream(Paths.get("src/test/resources"));
 
-        paths.forEach(p -> {
-            try {
-                Files.lines(p).forEach(System.out::println);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-
-
-
-        while(TOKENIZER.incrementToken()) {
-            System.out.println("merong");
-        }
 
     }
 
 
     @After
     public void finish() throws IOException {
-        TOKENIZER.close();
         R.close();
+        tokenizer.close();
     }
 }
