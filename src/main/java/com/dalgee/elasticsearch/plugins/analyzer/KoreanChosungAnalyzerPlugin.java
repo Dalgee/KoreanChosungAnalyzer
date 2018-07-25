@@ -1,13 +1,9 @@
 package com.dalgee.elasticsearch.plugins.analyzer;
 
-import com.dalgee.elasticsearch.plugins.filters.KoreanChosungTokenFilter;
 import com.dalgee.elasticsearch.plugins.filters.KoreanChosungTokenFilterFactory;
-import com.dalgee.elasticsearch.plugins.tokenizer.KoreanChosungTokenizerFactory;
 import org.apache.lucene.analysis.Analyzer;
-
 import org.elasticsearch.index.analysis.AnalyzerProvider;
 import org.elasticsearch.index.analysis.TokenFilterFactory;
-import org.elasticsearch.index.analysis.TokenizerFactory;
 import org.elasticsearch.indices.analysis.AnalysisModule;
 import org.elasticsearch.plugins.AnalysisPlugin;
 import org.elasticsearch.plugins.Plugin;
